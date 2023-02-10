@@ -57,18 +57,39 @@ INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (03, 2, 'Tuesday
 INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (02, 3, 'Wednesday');
 INSERT INTO assignments (employee_id, enclosure_id, day) VALUES (01, 2, 'Wednesday');
 
-/*ANSWERS.
-The names of the animals in a given enclosure
-SELECT enclosures.name as enclosures, animals.name FROM enclosures INNER JOIN animals ON enclosures.id = animals.enclosure_id WHERE enclosures.name = 'Cats';
+/* ANSWERS.
+--The names of the animals in a given enclosure
+SELECT enclosures.name AS enclosures, animals.name 
+FROM enclosures 
+INNER JOIN animals ON enclosures.id = animals.enclosure_id 
+WHERE enclosures.name = 'Tropical Birds'
 
-The names of the staff working in a given enclosure
-SELECT enclosures.name as enclosure_name, staff.name as staff_name FROM assignments INNER JOIN staff ON assignments.employee_id = staff.id INNER JOIN enclosures ON assignments.enclosure_id = enclosures.id WHERE enclosures.name = 'Cats';
+--The names of the staff working IN a given enclosure
+SELECT enclosures.name AS enclosure_name, staff.name AS staff_name 
+FROM assignments INNER JOIN staff ON assignments.employee_id = staff.id 
+INNER JOIN enclosures ON assignments.enclosure_id = enclosures.id 
+WHERE enclosures.name = 'Cats';
 
 EXTENSIONS.
-The names of staff working in enclosures which are closed for maintenance
+
+--The names of staff working IN enclosures which are closed for maintenance
 SELECT staff.name
 FROM staff
 INNER JOIN assignments ON staff.id = assignments.employee_id
 INNER JOIN enclosures ON assignments.enclosure_id = enclosures.id
 WHERE enclosures.closedForMaintenance = 'False';
-*/
+
+The name of the enclosure where the oldest animal lives. If there are two animals who are the same age choose the first one alphabetically.
+SELECT enclosures.name
+FROM animals
+INNER JOIN enclosures
+ON animals.enclosure_id = enclosures.id
+ORDER BY animals.age DESC, animals.name
+LIMIT 1;
+
+*/ 
+
+
+
+
+
